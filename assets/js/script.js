@@ -40,4 +40,31 @@ if (time >= 9 && time <= 17) {
         }
     })
     
-    }
+    };
+
+
+    // grab textarea 
+    $('textarea').each(function() {
+
+    });
+
+    // need localStorage
+    // localStorage.setItem('key', 'value');
+
+    // event handling
+    saveBtnEl.on('click', function(event) {
+        var targetBlock = $(event.currentTarget).attr('btnNum');
+        var index = targetBlock - 9;
+        var userEntry = textareaFieldEl.get(index).value;
+
+        // save THIS textarea value?
+        console.log(userEntry);
+    });
+
+    // save ALL textarea values -MAYBE, HOW?
+    var timeBlockObj = {
+        hour: 0,
+        text: "",
+    };
+
+    var timeBlockArr = []
