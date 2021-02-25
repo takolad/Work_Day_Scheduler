@@ -3,55 +3,56 @@ var timeBlockContainerEl = $('.container')
 var saveBtnEl = $('.saveBtn');
 var textareaFieldEl = $('.description > textarea')
 
-// object to hold hour and text entered from textarea
-// var timeBlockObj = [];
+// object to hold hour and text entered from textarea // considering removing/changing hour
 var timeBlockObj = [
     {
         hour: 0,
         text: "",
     }, 
     {
-        hour: 1,
+        hour: 0,
         text: "",
     },
     {
-        hour: 2,
+        hour: 0,
         text: "",
     },
     {
-        hour: 3,
+        hour: 0,
         text: "",
     }, 
     {
-        hour: 4,
+        hour: 0,
         text: "",
     },
     {
-        hour: 5,
+        hour: 0,
         text: "",
     },
     {
-        hour: 6,
+        hour: 0,
         text: "",
     }, 
     {
-        hour: 7,
+        hour: 0,
         text: "",
     },
     {
-        hour: 8,
+        hour: 0,
         text: "",
     },
 ];
-// currently will display after refresh, but altering an entry and saving ERASES OTHERS
+
 // localStorage
 var savedTimeBlock = JSON.parse(localStorage.getItem('schedule'));
-var tempTime = [];
 if(typeof(savedTimeBlock) !== 'undefined' && savedTimeBlock != null) {
-    tempTime = savedTimeBlock;
+    timeBlockObj = savedTimeBlock;
+
     for (var i = 0; i < savedTimeBlock.length; i++) {
         var textareaEl = $(textareaFieldEl.get(i));
-        textareaEl.val(savedTimeBlock[i].text);
+        if (savedTimeBlock[i].hour !== 0) {
+            textareaEl.val(savedTimeBlock[i].text);
+        }
     }
 };
 
@@ -76,22 +77,23 @@ $(document).ready(function (){
         timeBlockObj[index].hour = targetBlock;
         timeBlockObj[index].text = userEntry;
 
-        console.log(timeBlockObj);
-        savedTimeBlock = timeBlockObj;
+        // console.log(timeBlockObj);
+        savedTimeBlock.concat(timeBlockObj).unique;
         localStorage.setItem('schedule', JSON.stringify(savedTimeBlock));
     });
     
 
 });
+
 //***************************************************//
 //  Logic to alter background colors for textareas   //
 //***************************************************//
 
 // hour in 24hr format
-// var time = moment().format('k');
+var time = moment().format('k');
 
 // For testing outside of work hours
-var time = 11;
+// var time = 11;
 
 if (time >= 9 && time <= 17) {
     // Checks each textarea's hour attribute and adds class based of comparison to momentjs time
@@ -112,8 +114,3 @@ if (time >= 9 && time <= 17) {
     })
     
     };
-
-    // need localStorage
-    // localStorage.setItem('key', 'value');
-
-    
