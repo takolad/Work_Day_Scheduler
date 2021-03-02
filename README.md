@@ -9,4 +9,4 @@
    ![Site Screenshot](assets/images/schedule_img2.png)
 
 ## Site Link
-   Link to [Work Day Scheduler](https://takolad.github.io/hw5-Work_Day_Scheduler/).
+   Link to [Work Day Scheduler](https://takolad.github.io/Work_Day_Scheduler/).
